@@ -1,0 +1,25 @@
+.heroSearch {
+  background-image: url(https://cdn.pixabay.com/photo/2014/08/09/15/45/sky-414199_960_720.jpg);
+  background-size: cover;
+  background-clip: border-box;
+  height: 90vh;
+}
+.heroSearch-home {
+  background-image: url(https://cdn.pixabay.com/photo/2014/08/09/15/45/sky-414199_960_720.jpg);
+  background-size: cover;
+  background-clip: border-box;
+}
+.meteo {
+  background-color: rgba(255, 255, 255, 0.623);
+}
+.linkTo {
+  text-decoration: none;
+  color: black;
+}
+body {
+  height: 100vh;
+}
+.reset {
+  width: 100px;
+  height: 50px;
+}
