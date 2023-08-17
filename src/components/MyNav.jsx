@@ -1,12 +1,13 @@
 import { Navbar, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const MyNav = (props) => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="text-center">
       <Container>
-        <Navbar.Brand href="http://localhost:3000/">
+        <Navbar.Brand>
           <img
-            alt=""
+            alt="logo"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrq_4wbEccDpZ6E7BI5fo1bT5W7i_o_tRXsg&usqp=CAU"
             width="30"
             height="30"
