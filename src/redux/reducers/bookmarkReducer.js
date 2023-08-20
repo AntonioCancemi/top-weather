@@ -23,4 +23,5 @@ export const bookmarkReducer = (state = initialState, action) => {
     default:
       return state;
   }
+  
 };

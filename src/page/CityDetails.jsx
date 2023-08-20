@@ -43,7 +43,7 @@ const CityDetails = () => {
       setSaved(true);
       //get index removeBookmark
       setIndexMark(bookmark.indexOf(newbookmark));
-      console.log(indexMark);
+      // console.log(indexMark);
     }
     //after data loading
   }, [loading]);
