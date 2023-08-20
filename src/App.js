@@ -6,6 +6,7 @@ import MyNav from "./components/MyNav";
 import MyFooter from "./components/MyFooter";
 import MyHome from "./page/MyHome";
 import CityDetails from "./page/CityDetails";
+import Bookmark from "./page/Bookmark";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         </Row>
         <Routes>
           <Route path="/" element={<MyHome />} />
+          <Route path="/bookmarks" element={<Bookmark />} />
           <Route path="/details/:lat/:lon" element={<CityDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

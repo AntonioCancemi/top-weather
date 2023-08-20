@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
-import { Row, Form, Col, Button } from "react-bootstrap";
-import MyNav from "../components/MyNav";
+import { useEffect } from "react";
+import { Row, Form, Col } from "react-bootstrap";
 import CityList from "../components/CityList";
-import MyFooter from "../components/MyFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosition } from "../redux/middleware/getPosition";
-import {
-  clearCountry,
-  clearKeyword,
-  setCountry,
-  setKeyword,
-} from "../redux/action/searchAtion";
+import { setCountry, setKeyword } from "../redux/action/searchAtion";
 const apiKey = "8cdafc0e1a99c13d56957f350ac92768";
 const MyHome = () => {
   const countryCodes = [
@@ -271,7 +264,7 @@ const MyHome = () => {
   const { data, loading, error } = useSelector((state) => state.position);
 
   useEffect(() => {
-    if ((keyword != "") & (country != "")) {
+    if ((keyword !== "") & (country !== "")) {
       dispatch(getPosition(keyword, country, apiKey));
     }
   }, [keyword]);
@@ -302,49 +295,21 @@ const MyHome = () => {
                 onChange={(e) => dispatch(setCountry(e.target.value))}
                 size="10"
               >
-                <option value="">Seleziona...</option>
+                <option value={country}>{country}</option>
                 {countryCodes.map((code) => (
                   <option key={code} value={code}>
                     {code}
                   </option>
                 ))}
               </Form.Control>
-              {/* <Form.Label>Country</Form.Label>
-              <Form.Control
-                type="text"
-                aria-describedby="country"
-                value={country}
-                onChange={(e) => {
-                  dispatch(setCountry(e.target.value));
-                }}
-              /> */}
             </div>
           </form>
         </Col>
-
-        <Button
-          className="reset"
-          onClick={() => {
-            dispatch(getPosition(keyword, country, apiKey));
-          }}
-        >
-          CERCA
-        </Button>
       </Row>
       <br />
 
       <Row className="justify-content-center d-flex text-dark align-content-center ">
-        {keyword != "" ? (
-          data ? (
-            <CityList cities={data} />
-          ) : (
-            <Col xs={8} className="text-center text-dark">
-              digita una citta`
-            </Col>
-          )
-        ) : (
-          <></>
-        )}
+        {keyword != "" ? data ? <CityList cities={data} /> : <></> : <></>}
       </Row>
     </>
   );

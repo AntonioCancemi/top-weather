@@ -1,7 +1,8 @@
 import { Navbar, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
-const MyNav = (props) => {
+import { BsBookmarks } from "react-icons/bs";
+const MyNav = () => {
+  const navigate = useNavigate();
   return (
     <Navbar bg="dark" variant="dark" className="text-center">
       <Container>
@@ -15,7 +16,9 @@ const MyNav = (props) => {
           />{" "}
           Top-Weather
         </Navbar.Brand>
-        <Navbar.Text>{props.city ? props.city : ""}</Navbar.Text>
+        <div className="text-light" onClick={() => navigate("/bookmarks")}>
+          <BsBookmarks />
+        </div>
       </Container>
     </Navbar>
   );

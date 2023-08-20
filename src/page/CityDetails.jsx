@@ -20,33 +20,37 @@ const CityDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [saved, setSaved] = useState(false);
-  const [indexMark, setIndexMark] = useState(null);
   const { lat } = useParams();
   const { lon } = useParams();
   const { country } = useSelector((state) => state.search);
   const { data, loading, error } = useSelector((state) => state.weather);
   const { bookmark } = useSelector((state) => state.bookmark);
-
+  const newbookmark = `${data.name}/${country}`;
+  function checkBookmark() {
+    //check if saved
+    let filteredBM = bookmark.filter(
+      (bookmark, index) => bookmark === newbookmark
+    );
+    if (filteredBM.includes(filteredBM[0])) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }
   const result = (x) => {
     x ? new Date(x * 1000).toISOString().slice(11, 16) : console.log("notime");
   };
 
   useEffect(() => {
     //start fetch
+    console.log(lat, lon, apiKey);
     dispatch(getWeather(lat, lon, apiKey));
   }, []);
+  //check bookmarks for icon/function change
+  //after data loading
   useEffect(() => {
-    console.log(country, saved);
-    let newbookmark = `${data.name}/${country}`;
-    //check if saved
-    if (bookmark != [] && !bookmark?.includes(newbookmark)) {
-      setSaved(true);
-      //get index removeBookmark
-      setIndexMark(bookmark.indexOf(newbookmark));
-      // console.log(indexMark);
-    }
-    //after data loading
-  }, [loading]);
+    checkBookmark();
+  }, [loading, bookmark]);
 
   return (
     <>
@@ -67,21 +71,22 @@ const CityDetails = () => {
                       onClick={
                         saved
                           ? () =>
+                              dispatch(
+                                removeBookmark(bookmark.indexOf(newbookmark))
+                              )
+                          : () =>
                               dispatch(setBookmark(`${data.name}/${country}`))
-                          : () => dispatch(removeBookmark(indexMark))
                       }
                     >
-                      {saved ? <BsBookmarkStar /> : <BsBookmarkStarFill />}
+                      {saved ? <BsBookmarkStarFill /> : <BsBookmarkStar />}
                     </div>
-                    <div onClick={() => dispatch(clearBookmark())}>clear</div>
                   </div>
                 </Col>
               </Row>
               <Row className=" pt-2 ">
                 <Col xs={12} className="d-flex align-content-center">
                   <span className="fs-1">
-                    {" "}
-                    {data.name} {data.sys.country}
+                    {data.name} {country}
                   </span>
                 </Col>
               </Row>

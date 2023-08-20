@@ -1,7 +1,8 @@
 import {
   CLEAR_BOOKMARK,
   REMOVE_BOOKMARK,
-  SET_BOOKMARK,
+  ADD_BOOKMARK,
+  GET_BOOKMARK,
 } from "../action/bookmarkAction";
 
 const initialState = {
@@ -9,19 +10,21 @@ const initialState = {
 };
 export const bookmarkReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_BOOKMARK:
+    case ADD_BOOKMARK:
       return { ...state, bookmark: [...state.bookmark, action.payload] };
     case CLEAR_BOOKMARK:
       return { ...state, bookmark: [] };
     case REMOVE_BOOKMARK:
+      const updatedBookmarks = state.bookmark.filter(
+        (bookmark, index) => index !== action.payload
+      );
       return {
         ...state,
-        bookmark:
-          state.bookmark.slice(0, action.payload) +
-          state.bookmark.slice(action.payload, state.bookmark.lenght),
+        bookmark: updatedBookmarks,
       };
+    case GET_BOOKMARK:
+      return state;
     default:
       return state;
   }
-  
 };

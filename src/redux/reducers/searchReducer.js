@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   keyword: "Roma",
-  country: "it",
+  country: "IT",
 };
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
